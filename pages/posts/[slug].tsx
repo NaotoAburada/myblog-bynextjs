@@ -5,6 +5,7 @@ import Container from '../../components/container'
 import PostBody from '../../components/post-body'
 import Header from '../../components/header'
 import PostHeader from '../../components/post-header'
+import PreviousArticle from '../../components/previous-article'
 import Layout from '../../components/layout'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
@@ -24,6 +25,17 @@ const Post: React.FC<Props> = ({ post, morePosts, preview }) => {
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
+
+//  let previousArticle = post
+  let linkpostpre = -1
+
+  for (let i = 0; i < morePosts.length; i++) {
+    if (post?.slug == morePosts[i].slug) {
+      linkpostpre = i
+    }
+  }
+//  previousArticle = morePosts[linkpostpre + 1]
+
   return (
     <Layout preview={preview}>
       <Container>
@@ -46,6 +58,14 @@ const Post: React.FC<Props> = ({ post, morePosts, preview }) => {
                 author={post.author}
               />
               <PostBody content={post.content} />
+              <PreviousArticle
+                title={morePosts[linkpostpre + 1].title}
+                coverImage={morePosts[linkpostpre + 1].coverImage}
+                date={morePosts[linkpostpre + 1].date}
+                author={morePosts[linkpostpre + 1].author}
+                slug={morePosts[linkpostpre + 1].slug}
+                excerpt={morePosts[linkpostpre + 1].excerpt}
+              />
             </article>
           </>
         )}
@@ -72,7 +92,17 @@ export async function getStaticProps({ params }: Params) {
     'ogImage',
     'coverImage',
   ])
+
   const content = await markdownToHtml(post.content || '')
+
+  const allPosts = getAllPosts([
+    'title',
+    'date',
+    'slug',
+    'author',
+    'coverImage',
+    'excerpt',
+  ])
 
   return {
     props: {
@@ -80,6 +110,7 @@ export async function getStaticProps({ params }: Params) {
         ...post,
         content,
       },
+      morePosts: allPosts, 
     },
   }
 }

@@ -1,0 +1,51 @@
+import React from 'react'
+import PostPreview from './post-preview'
+import Author from '../types/author'
+import PostType from '../types/post'
+
+type Props = {
+  title: string
+  coverImage: string
+  date: string
+  excerpt: string
+  author: Author
+  slug: string
+}
+
+/*
+type Props = {
+  post : PostType
+}
+*/
+/*
+const PreviousArticle: React.FC<Props> = ({ post}) => {
+*/
+const PreviousArticle: React.FC<Props> = ({ 
+  title,
+  coverImage,
+  date,
+  excerpt,
+  author,
+  slug,
+}) => {
+  return (
+    <section>
+      <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
+        PreviousArticle
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 md:col-gap-16 lg:col-gap-32 row-gap-20 md:row-gap-32 mb-32">
+        <PostPreview
+          key={slug}
+          title={title}
+          coverImage={coverImage}
+          date={date}
+          author={author}
+          slug={slug}
+          excerpt={excerpt}
+        />
+      </div>
+    </section>
+  )
+}
+
+export default PreviousArticle
