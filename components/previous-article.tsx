@@ -1,49 +1,31 @@
 import React from 'react'
-import PostPreview from './post-preview'
-import Author from '../types/author'
+import LinkPreview from './link-preview'
 import PostType from '../types/post'
+import { Link } from '@material-ui/core';
 
-type Props = {
-  title: string
-  coverImage: string
-  date: string
-  excerpt: string
-  author: Author
-  slug: string
-}
-
-/*
 type Props = {
   post : PostType
+  linknumber? : number
 }
-*/
-/*
-const PreviousArticle: React.FC<Props> = ({ post}) => {
-*/
-const PreviousArticle: React.FC<Props> = ({ 
-  title,
-  coverImage,
-  date,
-  excerpt,
-  author,
-  slug,
-}) => {
+
+const PreviousArticle: React.FC<Props> = ({ post, linknumber = 0 }) => {
   return (
     <section>
-      <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
+      <h4>
         PreviousArticle
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 md:col-gap-16 lg:col-gap-32 row-gap-20 md:row-gap-32 mb-32">
-        <PostPreview
-          key={slug}
-          title={title}
-          coverImage={coverImage}
-          date={date}
-          author={author}
-          slug={slug}
-          excerpt={excerpt}
-        />
-      </div>
+      </h4>
+      <Link>
+        {linknumber === -1 ? (
+          <div>リンク先なし</div>
+        ) : (
+          <LinkPreview
+              key={post.slug}
+              title={post.title}
+              date={post.date}
+              slug={post.slug}
+            />
+        )}
+      </Link>
     </section>
   )
 }

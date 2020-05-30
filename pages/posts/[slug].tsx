@@ -6,6 +6,7 @@ import PostBody from '../../components/post-body'
 import Header from '../../components/header'
 import PostHeader from '../../components/post-header'
 import PreviousArticle from '../../components/previous-article'
+import BackArticle from '../../components/back-article'
 import Layout from '../../components/layout'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
@@ -13,6 +14,7 @@ import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
 import PostType from '../../types/post'
+import { Breadcrumbs } from '@material-ui/core';
 
 type Props = {
   post: PostType
@@ -28,13 +30,17 @@ const Post: React.FC<Props> = ({ post, morePosts, preview }) => {
 
 //  let previousArticle = post
   let linkpostpre = -1
-
+  let linkpostback = morePosts.length
   for (let i = 0; i < morePosts.length; i++) {
-    if (post?.slug == morePosts[i].slug) {
-      linkpostpre = i
+    if (post?.slug === morePosts[i].slug) {
+      if(i !== 0) {
+        linkpostpre = i - 1
+      }
+      linkpostback = i + 1
     }
   }
-//  previousArticle = morePosts[linkpostpre + 1]
+
+  //  previousArticle = morePosts[linkpostpre + 1]
 
   return (
     <Layout preview={preview}>
@@ -58,16 +64,28 @@ const Post: React.FC<Props> = ({ post, morePosts, preview }) => {
                 author={post.author}
               />
               <PostBody content={post.content} />
-              <PreviousArticle
-                title={morePosts[linkpostpre + 1].title}
-                coverImage={morePosts[linkpostpre + 1].coverImage}
-                date={morePosts[linkpostpre + 1].date}
-                author={morePosts[linkpostpre + 1].author}
-                slug={morePosts[linkpostpre + 1].slug}
-                excerpt={morePosts[linkpostpre + 1].excerpt}
-              />
+              <div className="flex">
+                {linkpostpre === -1 ? (
+                  <PreviousArticle
+                    post={morePosts[linkpostpre]} linknumber={linkpostpre}
+                  />
+                ) : (
+                  <PreviousArticle
+                    post={morePosts[linkpostpre]}
+                  />
+                )}
+                {linkpostback === morePosts.length ? (
+                  <BackArticle
+                    post={morePosts[linkpostpre]} linknumber={0}
+                  />
+                ) : (
+                  <BackArticle
+                    post={morePosts[linkpostback]}
+                  />
+                )}
+              </div>
             </article>
-          </>
+           </>
         )}
       </Container>
     </Layout>
