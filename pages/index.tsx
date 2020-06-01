@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "../components/container";
-import MoreStories from "../components/more-stories";
+import ArticleList from "../components/article-list";
 import HeroPost from "../components/hero-post";
 import Intro from "../components/intro";
 import Layout from "../components/layout";
@@ -9,33 +9,16 @@ import Head from "next/head";
 import { CMS_NAME } from "../lib/constants";
 import Post from "../types/post";
 import useSWR from "swr";
+import CMS from "../types/cms";
 
 type Props = {
   allPosts: Post[];
 };
 
+//const Index: React.FC = ({}) => {
 const Index: React.FC<Props> = ({ allPosts }) => {
-  const heroPost = allPosts[0];
-  const morePosts = allPosts.slice(1);
-
+  /*
   const cmsurl = "https://myblog-nextjs.microcms.io/api/v1/blog";
-
-  // CMSからのレスポンス結果の型定義
-  type Result = {
-    contents: {
-      id: string;
-      createdAt: string;
-      updatedAt: string;
-      title: string;
-      excerpt: string;
-      date: string;
-      slug: string;
-      blogtext: string;
-    }[];
-    totalCount: string;
-    offset: string;
-    limit: string;
-  };
 
   // API呼び出しの準備
   const fetcher = () =>
@@ -47,16 +30,13 @@ const Index: React.FC<Props> = ({ allPosts }) => {
     }).then((res) => res.json());
 
   // SWRを使用してのAPI呼び出し
-  const { data, error } = useSWR<Result, {}>(cmsurl, fetcher);
+  const { data, error } = useSWR<CMS, {}>(cmsurl, fetcher);
 
-  /*
-  const fetcher = (
-    url : string
-  ) => fetch("https://api.github.com/users/facebook/repos").then(res => res.json());
-  const {data, error} = useSWR("https://api.github.com/users/facebook/repos", fetcher)
-*/
   if (error) return <div>error</div>;
   if (!data) return <div>loading...</div>;
+
+  const articleList = data.contents.reverse();
+*/
 
   return (
     <>
@@ -66,19 +46,11 @@ const Index: React.FC<Props> = ({ allPosts }) => {
         </Head>
         <Container>
           <Intro />
-          {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
-            />
-          )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+          <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
+            Article List
+          </h2>
+          {allPosts.length > 0 && <ArticleList posts={allPosts} />}
         </Container>
-        {data.contents[0].slug}
       </Layout>
     </>
   );
@@ -86,6 +58,29 @@ const Index: React.FC<Props> = ({ allPosts }) => {
 
 export default Index;
 
+export async function getStaticProps() {
+  const cmsurl = "https://myblog-nextjs.microcms.io/api/v1/blog";
+
+  const res = await fetch(cmsurl, {
+    method: "GET",
+    headers: {
+      "X-API-KEY": "c2bf30d3-1da2-45a3-8327-b992b9006af3",
+    },
+  });
+  const posts = await res.json();
+
+  const articleList = posts.contents;
+  /*
+  const paths = articleList.map(
+    (article: PostType) => `/posts/${article.id.toString}`
+  );
+*/
+  return {
+    props: { allPosts: articleList },
+  };
+}
+
+/*
 export const getStaticProps = async () => {
   const allPosts = getAllPosts([
     "title",
@@ -100,3 +95,4 @@ export const getStaticProps = async () => {
     props: { allPosts },
   };
 };
+*/
