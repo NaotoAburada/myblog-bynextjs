@@ -45,6 +45,7 @@ const CommentForm: React.FC<BlogID> = (blogid: BlogID) => {
       blogid: blogid.blogid,
       comment: comment,
     };
+
     const body = JSON.stringify(blogcomment);
     // API呼び出しの準備
     fetch(cmsurl, {

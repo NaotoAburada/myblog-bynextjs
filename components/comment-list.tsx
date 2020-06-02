@@ -5,6 +5,13 @@ type BlogID = {
   blogid: string;
 };
 
+export type Comments = {
+  commentLi: {
+    id: string;
+    comment: string;
+  }[];
+};
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -22,20 +29,24 @@ const useStyles = makeStyles({
   },
 });
 
-const CommentList: React.FC<BlogID> = ({ blogid }) => {
+const CommentList: React.FC<Comments> = ({ commentLi }) => {
   const classes = useStyles();
   return (
-    <Card variant="outlined">
-      <CardContent>
-        <Typography
-          className={classes.title}
-          color="textSecondary"
-          gutterBottom
-        >
-          Word of the Day
-        </Typography>
-      </CardContent>
-    </Card>
+    <div>
+      {commentLi.map((come) => (
+        <Card variant="outlined">
+          <CardContent>
+            <Typography
+              className={classes.title}
+              color="textSecondary"
+              gutterBottom
+            >
+              {come.comment}
+            </Typography>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
   );
 };
 

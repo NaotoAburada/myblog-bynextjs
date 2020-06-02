@@ -17,6 +17,27 @@ type Props = {
 
 //const Index: React.FC = ({}) => {
 const Index: React.FC<Props> = ({ allPosts }) => {
+  /*
+  const cmsurl = "https://myblog-nextjs.microcms.io/api/v1/blog";
+
+  // API呼び出しの準備
+  const fetcher = () =>
+    fetch(cmsurl, {
+      method: "GET",
+      headers: {
+        "X-API-KEY": "c2bf30d3-1da2-45a3-8327-b992b9006af3",
+      },
+    }).then((res) => res.json());
+
+  // SWRを使用してのAPI呼び出し
+  const { data, error } = useSWR<CMS, {}>(cmsurl, fetcher);
+
+  if (error) return <div>error</div>;
+  if (!data) return <div>loading...</div>;
+
+  const articleList = data.contents.reverse();
+*/
+
   return (
     <>
       <Layout>
