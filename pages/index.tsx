@@ -10,6 +10,7 @@ import { CMS_NAME } from "../lib/constants";
 import Post from "../types/post";
 import useSWR from "swr";
 import CMS from "../types/cms";
+import Profile from "./profile";
 
 type Props = {
   allPosts: Post[];

@@ -5,11 +5,14 @@ import Dialog, { DialogProps } from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import useSWR from "swr";
+import CMSBlogComment from "../types/cms-blogcomment";
 
-type BlogID = {
+//import { UseCommentList } from "./comment-box";
+
+type Props = {
   blogid: string;
+  addComment: (comment: CMSBlogComment) => void;
+  updateComment: () => Promise<boolean>;
 };
 
 type CMSBlog = {
@@ -17,7 +20,14 @@ type CMSBlog = {
   comment: string;
 };
 
-const CommentForm: React.FC<BlogID> = (blogid: BlogID) => {
+export type Comments = {
+  commentLi: {
+    id: string;
+    comment: string;
+  }[];
+};
+
+const CommentForm: React.FC<Props> = (props: Props) => {
   const [open, setOpen] = React.useState(false);
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState<DialogProps["maxWidth"]>("sm");
@@ -42,7 +52,7 @@ const CommentForm: React.FC<BlogID> = (blogid: BlogID) => {
     const cmsurl = "https://myblog-nextjs.microcms.io/api/v1/comment";
 
     const blogcomment: CMSBlog = {
-      blogid: blogid.blogid,
+      blogid: props.blogid,
       comment: comment,
     };
 
@@ -61,6 +71,15 @@ const CommentForm: React.FC<BlogID> = (blogid: BlogID) => {
     );
 
     setComment("");
+    const tmp: CMSBlogComment = {
+      id: blogcomment.blogid,
+      comment: blogcomment.comment,
+    };
+
+    // props.addComment(tmp);
+    // ここは必ずAPI更新後に呼ぶ
+    // props.updateComment();
+
     setOpen(false);
   };
 
