@@ -1,50 +1,32 @@
-# A statically generated blog example using Next.js and Markdown and TypeScript
+# ブログの公開先 URL
 
-This is the existing [blog-starter](https://github.com/zeit/next.js/tree/canary/examples/blog-starter) plus TypeScript.
+[Naoto Aburada Blog.](https://github.com/zeit/next.js/tree/canary/examples/blog-starter)
 
-This example showcases Next.js's [Static Generation](https://nextjs.org/docs/basic-features/pages) feature using markdown files as the data source.
+# 機能ついて
 
-The blog posts are stored in `/_posts` as markdown files with front matter support. Adding a new markdown file in there will create a new blog post.
+- CMS に投稿してあるブログ記事の一覧表示（最大 100 件）
+- ブログ記事ごとのコメント一覧表示（最大 100 件）
+- ブログ記事へのコメント投稿機能
+- 表示しているブログ記事の前後に投稿されたブログ記事へ移動する
+- 今後追加予定の機能
+- ブログ記事へのタグ機能追加
+- タグごとの記事を表示する機能
+- 月別に投稿されたブログ記事の件数表示
+- ブログ記事の検索機能
+- ページ機能
 
-To create the blog posts we use [`remark`](https://github.com/remarkjs/remark) and [`remark-html`](https://github.com/remarkjs/remark-html) to convert the markdown files into an HTML string, and then send it down as a prop to the page. The metadata of every post is handled by [`gray-matter`](https://github.com/jonschlinkert/gray-matter) and also sent in props to the page.
+# 概要
 
-## How to use
+今回作成したブログでは、サーバサイド側を必要としなったためフロントエンド側の実装しか行って行っていません。
+作成期間が短かったのでスタイルを考える時間を減らすために、Material-ui を積極的に利用しました。
+テストコードについては、打鍵ですませているためテストコードはありません。
 
-### Using `create-next-app`
+# 採用技術
 
-Execute [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npm init next-app --example blog-starter blog-starter-app
-# or
-yarn create next-app --example blog-starter blog-starter-app
-```
-
-### Download manually
-
-Download the example:
-
-```bash
-curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/blog-starter
-cd blog-starter
-```
-
-Install dependencies and run the example:
-
-```bash
-npm install
-npm run dev
-
-# or
-
-yarn install
-yarn dev
-```
-
-Your blog should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/zeit/next.js/discussions).
-
-Deploy it to the cloud with [Vercel](https://vercel.com/import?filter=next.js&utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
-
-# Notes
-
-This blog-starter uses [Tailwind CSS](https://tailwindcss.com). To control the generated stylesheet's filesize, this example uses Tailwind CSS' v1.4 [`purge` option](https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css) to remove unused CSS.
+- TypeScript
+- next.js
+- Material-ui
+- SWR
+- Node.js(npm)
+- CMS として microCMS を使用
+- 公開するためのデプロイ先は vercel を使用
