@@ -60,23 +60,21 @@ const Post: React.FC<Props> = ({ post, morePosts, arrayLength, preview }) => {
   return (
     <Layout preview={preview}>
       <Container>
-        <Header />
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-            <article>
+            <article className="max-w-2xl mx-auto">
+              <Header />
               <Head>
                 <title>{post.title}</title>
               </Head>
               <PostHeader title={post.title} date={post.date} />
               <PostBody content={post.blogtext} />
-            </article>
-            <br />
-            <div className={classes.root}>
-              <Grid container spacing={2} justify="space-between">
-                <Grid item xs={4}>
-                  <Paper className={classes.paper}>
+              <br />
+              <div>
+                <Grid container spacing={2} justify="space-between">
+                  <Grid item xs={3} className={classes.paper}>
                     {linkpostpre === -1 ? (
                       <PreviousArticle
                         post={morePosts[0]}
@@ -85,20 +83,18 @@ const Post: React.FC<Props> = ({ post, morePosts, arrayLength, preview }) => {
                     ) : (
                       <PreviousArticle post={morePosts[linkpostpre]} />
                     )}
-                  </Paper>
-                </Grid>
-                <Grid item xs={4}>
-                  <Paper className={classes.paper}>
+                  </Grid>
+                  <Grid item xs={3} className={classes.paper}>
                     {linkpostback === arrayLength ? (
                       <BackArticle post={morePosts[0]} linknumber={0} />
                     ) : (
                       <BackArticle post={morePosts[linkpostback]} />
                     )}
-                  </Paper>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </div>
-            <br />
+              </div>
+              <br />
+            </article>
             <div className="max-w-2xl mx-auto">
               <CommentBox blogid={post.id} />
             </div>
@@ -118,7 +114,7 @@ type Params = {
 };
 
 export async function getStaticPaths() {
-  const cmsurl = "https://myblog-nextjs.microcms.io/api/v1/blog";
+  const cmsurl = "https://myblog-nextjs.microcms.io/api/v1/blog?limit=100";
 
   const res = await fetch(cmsurl, {
     method: "GET",
@@ -141,7 +137,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: Params) {
   const id = params.id;
 
-  const cmsurl = `https://myblog-nextjs.microcms.io/api/v1/blog/`;
+  let cmsurl = `https://myblog-nextjs.microcms.io/api/v1/blog/`;
 
   let res = await fetch(`${cmsurl}${id}`, {
     method: "GET",
@@ -152,6 +148,8 @@ export async function getStaticProps({ params }: Params) {
   let posts = await res.json();
   const article = posts;
   const content = marked(posts.blogtext);
+
+  cmsurl = "https://myblog-nextjs.microcms.io/api/v1/blog/?limit=100";
 
   res = await fetch(cmsurl, {
     method: "GET",

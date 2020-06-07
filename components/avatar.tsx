@@ -8,8 +8,8 @@ type Props = {
 const Avatar: React.FC<Props> = ({ name, picture }) => {
   return (
     <div className="flex items-center">
-      <img src={picture} className="w-20 h-20 rounded-full mr-4" alt={name} />
-      <div className="text-xl font-bold">{name}</div>
+      <img src={picture} className="w-16 h-16 rounded-full mr-4" alt={name} />
+      <div className="text-xl">{name}</div>
     </div>
   );
 };

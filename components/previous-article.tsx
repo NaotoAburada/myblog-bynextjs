@@ -1,7 +1,7 @@
 import React from "react";
-import LinkPreview from "./link-preview";
 import PostType from "../types/post";
-import { Link, Typography } from "@material-ui/core";
+import Link from "next/link";
+import { Button } from "@material-ui/core";
 
 type Props = {
   post: PostType;
@@ -9,20 +9,30 @@ type Props = {
 };
 
 const PreviousArticle: React.FC<Props> = ({ post, linknumber = 0 }) => {
-  const title =
-    post.title.length > 15 ? `${post.title.substr(0, 15)}...` : `${post.title}`;
+  const id = post.id;
   return (
     <section>
-      <Typography variant="h6">次の記事へ</Typography>
       {linknumber === -1 ? (
-        <div>リンク先なし</div>
+        <div></div>
       ) : (
-        <Link>
-          <LinkPreview key={post.slug} id={post.id} title={title} date="" />
-        </Link>
+        <Button variant="outlined" color="primary" href="#outlined-buttons">
+          <Link as={`/posts/${id}`} href="/posts/[id]">
+            <div className="mx-2">次の記事へ</div>
+          </Link>
+        </Button>
       )}
     </section>
   );
 };
+
+// <Typography variant="h6">次の記事へ</Typography>
+// <Link>
+// <LinkPreview
+//   key={post.id}
+//   id={post.id}
+//   title={"次の記事へ"}
+//   date=""
+// />
+// </Link>
 
 export default PreviousArticle;

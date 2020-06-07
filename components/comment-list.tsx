@@ -1,15 +1,14 @@
 import React from "react";
 import { Card, CardContent, Typography, makeStyles } from "@material-ui/core";
+import DateFormater from "./date-formater";
+import CMSBlogComment from "../types/cms-blogcomment";
 
 type BlogID = {
   blogid: string;
 };
 
 export type Comments = {
-  commentLi: {
-    id: string;
-    comment: string;
-  }[];
+  commentLi: CMSBlogComment[];
 };
 
 const useStyles = makeStyles({
@@ -34,20 +33,31 @@ const CommentList: React.FC<Comments> = ({ commentLi }) => {
   return (
     <div>
       {commentLi.map((come) => (
-        <Card variant="outlined">
-          <CardContent>
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-            >
-              {come.comment}
-            </Typography>
-          </CardContent>
-        </Card>
+        <div className="text-lg mb-6">
+          {come.comment}
+          <br />
+          コメント投稿日時：
+          <DateFormater dateString={come.createdAt} />
+          <hr />
+        </div>
       ))}
     </div>
   );
 };
 
 export default CommentList;
+
+// <Card variant="outlined">
+// <CardContent>
+//   <Typography
+//     className={classes.title}
+//     color="textSecondary"
+//     gutterBottom
+//   >
+//     {come.comment}
+//     <div className="text-lg ml-6">
+//       <DateFormater dateString={date} />
+//     </div>
+//   </Typography>
+// </CardContent>
+// </Card>

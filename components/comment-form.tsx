@@ -7,12 +7,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import CMSBlogComment from "../types/cms-blogcomment";
 
-//import { UseCommentList } from "./comment-box";
-
 type Props = {
   blogid: string;
-  addComment: (comment: CMSBlogComment) => void;
-  updateComment: () => Promise<boolean>;
+  //  addComment: (comment: CMSBlogComment) => void;
+  //  updateComment: () => Promise<boolean>;
 };
 
 type CMSBlog = {
@@ -71,10 +69,10 @@ const CommentForm: React.FC<Props> = (props: Props) => {
     );
 
     setComment("");
-    const tmp: CMSBlogComment = {
-      id: blogcomment.blogid,
-      comment: blogcomment.comment,
-    };
+    // const tmp: CMSBlogComment = {
+    //   id: blogcomment.blogid,
+    //   comment: blogcomment.comment,
+    // };
 
     // props.addComment(tmp);
     // ここは必ずAPI更新後に呼ぶ

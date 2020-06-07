@@ -15,7 +15,7 @@ const PostHeader: React.FC<Props> = ({ title, date }) => {
     <>
       <PostTitle>{title}</PostTitle>
       <div className="max-w-2xl mx-auto">
-        <div className="mb-6 text-lg">
+        <div className="b-6 text-lg">
           <DateFormater dateString={date} />
         </div>
       </div>

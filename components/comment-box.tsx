@@ -29,7 +29,7 @@ type Comment = {
 
 const CommentBox: React.FC<BlogID> = ({ blogid }) => {
   const classes = useStyles();
-  const cmsurl = `https://myblog-nextjs.microcms.io/api/v1/comment?filters=blogid[equals]${blogid}`;
+  const cmsurl = `https://myblog-nextjs.microcms.io/api/v1/comment?filters=blogid[equals]${blogid}&limit=100`;
 
   // API呼び出しの準備
   const fetcher = () =>
@@ -47,12 +47,12 @@ const CommentBox: React.FC<BlogID> = ({ blogid }) => {
     { refreshInterval: 1000 }
   );
 
-  const addComment = async (comment: { id: string; comment: string }) => {
-    const updatedContens = [...(data?.contents as []), comment];
-    console.log(updatedContens);
-    await mutate({ contents: updatedContens }, true);
-    console.log(data?.contents);
-  };
+  // const addComment = async (comment: { id: string; comment: string }) => {
+  //   const updatedContens = [...(data?.contents as []), comment];
+  //   console.log(updatedContens);
+  //   await mutate({ contents: updatedContens }, true);
+  //   console.log(data?.contents);
+  // };
 
   if (error) return <div>error</div>;
   if (!data) return <div>loading...</div>;
@@ -63,15 +63,13 @@ const CommentBox: React.FC<BlogID> = ({ blogid }) => {
       <br />
       <div className={classes.root}>
         <Grid container spacing={2} justify="space-between">
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Typography variant="h5">コメント一覧</Typography>
           </Grid>
-          <Grid item xs={4} alignItems="center">
-            <CommentForm
-              blogid={blogid}
-              addComment={addComment}
-              updateComment={revalidate}
-            />
+          <Grid item xs={3}>
+            <div className="ml-4">
+              <CommentForm blogid={blogid} />
+            </div>
           </Grid>
         </Grid>
       </div>

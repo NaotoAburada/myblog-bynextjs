@@ -12,6 +12,8 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import Link from "next/link";
 import { Typography } from "@material-ui/core";
+import { GITHUB_URL } from "../lib/constants";
+import Avatar from "../components/avatar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,6 +24,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     nested: {
       paddingLeft: theme.spacing(4),
+    },
+    nestedSecond: {
+      paddingLeft: theme.spacing(8),
     },
   })
 );
@@ -68,7 +73,7 @@ const Profile: React.FC = () => {
           >
             <ListItem>
               <ListItemIcon>
-                <Typography variant="h4">自己紹介</Typography>
+                <Typography variant="h5">自己紹介</Typography>
               </ListItemIcon>
             </ListItem>
             <Collapse in={true}>
@@ -87,126 +92,169 @@ const Profile: React.FC = () => {
 
             <ListItem>
               <ListItemIcon>
-                <Typography variant="h4">出身地：かごんま</Typography>
+                <Typography variant="h5">GitHub</Typography>
               </ListItemIcon>
             </ListItem>
+            <Collapse in={true}>
+              <List component="div" disablePadding>
+                <ListItem className={classes.nested}>
+                  <ListItemText>
+                    <a href={`${GITHUB_URL}`} target="_blank">
+                      <Avatar
+                        name="@NaotoAburada"
+                        picture="/assets/blog/profile/github.jpeg"
+                      />
+                    </a>
+                  </ListItemText>
+                </ListItem>
+              </List>
+            </Collapse>
 
             <ListItem>
               <ListItemIcon>
-                <Typography variant="h4">血液型：O型</Typography>
+                <Typography variant="h5">出身地</Typography>
               </ListItemIcon>
             </ListItem>
+            <Collapse in={true}>
+              <List component="div" disablePadding>
+                <ListItem className={classes.nested}>
+                  <ListItemText>かごんま</ListItemText>
+                </ListItem>
+              </List>
+            </Collapse>
 
             <ListItem>
               <ListItemIcon>
-                <Typography variant="h4">
-                  好きなもの：ラブライブ（話をしてあげると喜びます）、22/7
-                </Typography>
+                <Typography variant="h5">血液型</Typography>
               </ListItemIcon>
             </ListItem>
+            <Collapse in={true}>
+              <List component="div" disablePadding>
+                <ListItem className={classes.nested}>
+                  <ListItemText>O型</ListItemText>
+                </ListItem>
+              </List>
+            </Collapse>
 
             <ListItem>
               <ListItemIcon>
-                <Typography variant="h4">スキル一覧</Typography>
+                <Typography variant="h5">好きなもの</Typography>
+              </ListItemIcon>
+            </ListItem>
+            <Collapse in={true}>
+              <List component="div" disablePadding>
+                <ListItem className={classes.nested}>
+                  <ListItemText>
+                    ラブライブ（話をしてあげると喜びます）、22/7
+                  </ListItemText>
+                </ListItem>
+              </List>
+            </Collapse>
+
+            <ListItem>
+              <ListItemIcon>
+                <Typography variant="h5">スキル一覧</Typography>
               </ListItemIcon>
             </ListItem>
             <ListItem button onClick={handleClickLanguage}>
-              <ListItemIcon>
+              <ListItemIcon className={classes.nested}>
                 <Typography variant="h6">言語</Typography>
               </ListItemIcon>
               {openLanguage ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse in={openLanguage} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItem className={classes.nested}>
+                <ListItem className={classes.nestedSecond}>
                   <ListItemText>Java（1.6、1.8）</ListItemText>
                 </ListItem>
-                <ListItem className={classes.nested}>
+                <ListItem className={classes.nestedSecond}>
                   <ListItemText>JSP</ListItemText>
                 </ListItem>
-                <ListItem className={classes.nested}>
+                <ListItem className={classes.nestedSecond}>
                   <ListItemText>JavaScript</ListItemText>
                 </ListItem>
-                <ListItem className={classes.nested}>
+                <ListItem className={classes.nestedSecond}>
                   <ListItemText>HTML</ListItemText>
                 </ListItem>
-                <ListItem className={classes.nested}>
+                <ListItem className={classes.nestedSecond}>
                   <ListItemText>TypeScript</ListItemText>
                 </ListItem>
               </List>
             </Collapse>
 
             <ListItem button onClick={handleClickDB}>
-              <ListItemIcon>
+              <ListItemIcon className={classes.nested}>
                 <Typography variant="h6">DB関連</Typography>
               </ListItemIcon>
               {openDB ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse in={openDB} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItem className={classes.nested}>
+                <ListItem className={classes.nestedSecond}>
                   <ListItemText>Oracle</ListItemText>
                 </ListItem>
-                <ListItem className={classes.nested}>
+                <ListItem className={classes.nestedSecond}>
                   <ListItemText>PostgreSQL</ListItemText>
                 </ListItem>
-                <ListItem className={classes.nested}>
+                <ListItem className={classes.nestedSecond}>
                   <ListItemText>DB2</ListItemText>
                 </ListItem>
               </List>
             </Collapse>
 
             <ListItem button onClick={handleClickFrameWorkServer}>
-              <ListItemIcon>
+              <ListItemIcon className={classes.nested}>
                 <Typography variant="h6">FrameWork(サーバサイド)</Typography>{" "}
               </ListItemIcon>
               {openFrameWorkServer ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse in={openFrameWorkServer} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItem className={classes.nested}>
+                <ListItem className={classes.nestedSecond}>
                   <ListItemText>Spring</ListItemText>
                 </ListItem>
-                <ListItem className={classes.nested}>
+                <ListItem className={classes.nestedSecond}>
                   <ListItemText>MyBatis</ListItemText>
                 </ListItem>
-                <ListItem className={classes.nested}>
+                <ListItem className={classes.nestedSecond}>
                   <ListItemText>Justware</ListItemText>
                 </ListItem>
               </List>
             </Collapse>
 
             <ListItem button onClick={handleClickFrameWorkFront}>
-              <ListItemIcon>
+              <ListItemIcon className={classes.nested}>
                 <Typography variant="h6">FrameWork(フロントエンド)</Typography>{" "}
               </ListItemIcon>
               {openFrameWorkFront ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse in={openFrameWorkFront} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItem className={classes.nested}>
+                <ListItem className={classes.nestedSecond}>
                   <ListItemText>React</ListItemText>
                 </ListItem>
-                <ListItem className={classes.nested}>
+                <ListItem className={classes.nestedSecond}>
                   <ListItemText>Next.js</ListItemText>
                 </ListItem>
               </List>
             </Collapse>
 
             <ListItem button onClick={handleClickCloud}>
-              <ListItemIcon>
+              <ListItemIcon className={classes.nested}>
                 <Typography variant="h6">クラウド</Typography>{" "}
               </ListItemIcon>
               {openCloud ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse in={openCloud} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItem className={classes.nested}>
+                <ListItem className={classes.nestedSecond}>
                   <ListItemText>Azure</ListItemText>
                 </ListItem>
               </List>
             </Collapse>
           </List>
+
+          <br />
           <Typography variant="h4">
             <Link href="/">
               <a className="hover:underline">Blog TOPに戻る</a>
