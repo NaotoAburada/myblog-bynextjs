@@ -64,7 +64,7 @@ const Post: React.FC<Props> = ({ post, morePosts, arrayLength, preview }) => {
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-            <article className="max-w-2xl mx-auto">
+            <article className="max-w-3xl mx-auto">
               <Header />
               <Head>
                 <title>{post.title}</title>
@@ -95,7 +95,7 @@ const Post: React.FC<Props> = ({ post, morePosts, arrayLength, preview }) => {
               </div>
               <br />
             </article>
-            <div className="max-w-2xl mx-auto">
+            <div className="max-w-3xl mx-auto">
               <CommentBox blogid={post.id} />
             </div>
           </>

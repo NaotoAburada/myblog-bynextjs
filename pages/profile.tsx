@@ -14,6 +14,7 @@ import Link from "next/link";
 import { Typography } from "@material-ui/core";
 import { GITHUB_URL } from "../lib/constants";
 import Avatar from "../components/avatar";
+import Header from "../components/header";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,6 +67,7 @@ const Profile: React.FC = () => {
           <title>Naoto Aburada Profile</title>
         </Head>
         <Container>
+          <Header />
           <List
             component="nav"
             aria-labelledby="nested-list-subheader"
@@ -252,14 +254,8 @@ const Profile: React.FC = () => {
                 </ListItem>
               </List>
             </Collapse>
+            <div className="mb-20"></div>
           </List>
-
-          <br />
-          <Typography variant="h4">
-            <Link href="/">
-              <a className="hover:underline">Blog TOPに戻る</a>
-            </Link>
-          </Typography>
         </Container>
       </Layout>
     </>

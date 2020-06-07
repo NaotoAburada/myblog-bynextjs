@@ -67,7 +67,7 @@ const CommentBox: React.FC<BlogID> = ({ blogid }) => {
             <Typography variant="h5">コメント一覧</Typography>
           </Grid>
           <Grid item xs={3}>
-            <div className="ml-4">
+            <div className="ml-6">
               <CommentForm blogid={blogid} />
             </div>
           </Grid>

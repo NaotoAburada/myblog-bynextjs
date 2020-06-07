@@ -1,32 +1,17 @@
 import React from "react";
 import Container from "./container";
-import { SOURCE_CODE_URL, GITHUB_URL } from "../lib/constants";
+import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
     <footer className="bg-accent-1 border-t border-accent-2">
       <Container>
-        <div className="py-28 flex flex-col lg:flex-row items-center">
-          <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4 lg:w-1/2">
-            Statically Generated with Next.js.
-          </h3>
-          <div className="flex flex-col lg:flex-row justify-center items-center lg:pl-4 lg:w-1/2">
-            <a
-              href={`${GITHUB_URL}`}
-              className="mx-3 bg-black hover:bg-white hover:text-black border border-black text-white font-bold py-3 px-12 lg:px-8 duration-200 transition-colors mb-6 lg:mb-0"
-              target="_blank"
-            >
-              My GitHub
-            </a>
-            <a
-              href={`${SOURCE_CODE_URL}`}
-              className="mx-3 font-bold hover:underline"
-              target="_blank"
-            >
-              View on GitHub
-            </a>
-          </div>
-        </div>
+        <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-8 mt-8">
+          <Link href="/">
+            <a className="hover:underline">Blog TOPへ戻る</a>
+          </Link>
+        </h2>
+        <div className="mb-20"></div>
       </Container>
     </footer>
   );

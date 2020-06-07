@@ -5,6 +5,7 @@ import Intro from "../components/intro";
 import Layout from "../components/layout";
 import Head from "next/head";
 import Post from "../types/post";
+import Footer from "../components/footer";
 
 type Props = {
   allPosts: Post[];
@@ -19,13 +20,11 @@ const Index: React.FC<Props> = ({ allPosts }) => {
         </Head>
         <Container>
           <Intro />
-          <h3 className="mb-8 text-2xl md:text-2xl font-bold tracking-tighter leading-tight">
-            ラブライブが好きなエンジニアが学んだことをブログにしていきます。
-          </h3>
-          <h2 className="mb-10 text-4xl md:text-4xl font-bold tracking-tighter leading-tight">
+          <h2 className="mb-10 text-4xl bg-blue-300 md:text-4xl font-bold tracking-tighter leading-tight">
             記事一覧
           </h2>
           {allPosts.length > 0 && <ArticleList posts={allPosts} />}
+          <Footer />
         </Container>
       </Layout>
     </>
