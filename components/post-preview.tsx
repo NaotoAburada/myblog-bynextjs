@@ -1,9 +1,7 @@
 import React from "react";
-import Avatar from "./avatar";
 import DateFormater from "./date-formater";
-import CoverImage from "./cover-image";
 import Link from "next/link";
-import Author from "../types/author";
+import { Divider } from "@material-ui/core";
 
 type Props = {
   id: string;
@@ -24,6 +22,7 @@ const PostPreview: React.FC<Props> = ({ id, title, date, excerpt }) => {
         <DateFormater dateString={date} />
       </div>
       <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
+      <Divider />
     </div>
   );
 };

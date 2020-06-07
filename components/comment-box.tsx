@@ -1,8 +1,23 @@
-import React, { useCallback, useEffect } from "react";
-import CommentList, { Comments } from "./comment-list";
+import React from "react";
+import CommentList from "./comment-list";
 import CommentForm from "./comment-form";
 import useSWR from "swr";
 import CMSBlogComment from "../types/cms-blogcomment";
+import { Grid, Divider, Typography } from "@material-ui/core";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: "center",
+      color: theme.palette.text.secondary,
+    },
+  })
+);
 
 type BlogID = {
   blogid: string;
@@ -12,35 +27,8 @@ type Comment = {
   contents: CMSBlogComment[];
 };
 
-// export const UseCommentList = React.createContext([
-//   [{ id: "", comment: "" }],
-//   () => {},
-// ]);
-// export const UseCommentList: React.Context<
-//   {
-//     id: string;
-//     comment: string;
-//   }[]
-// > = React.createContext<
-//   {
-//     id: string;
-//     comment: string;
-//   }[]
-// >([{ id: "", comment: "" }]);
-
 const CommentBox: React.FC<BlogID> = ({ blogid }) => {
-  const [commentli, setCommentLi] = React.useState([{ id: "", comment: "" }]);
-
-  // const [commentli, setCommentLi]: [
-  //   { id: string; comment: string }[],
-  //   React.Dispatch<
-  //     {
-  //       id: string;
-  //       comment: string;
-  //     }[]
-  //   >
-  // ] = React.useState([{ id: "", comment: "" }]);
-
+  const classes = useStyles();
   const cmsurl = `https://myblog-nextjs.microcms.io/api/v1/comment?filters=blogid[equals]${blogid}`;
 
   // API呼び出しの準備
@@ -58,9 +46,7 @@ const CommentBox: React.FC<BlogID> = ({ blogid }) => {
     fetcher,
     { refreshInterval: 1000 }
   );
-  // setCommentLi(hoge.contents);
-  //revalidate();
-  //revalidateOnFocus
+
   const addComment = async (comment: { id: string; comment: string }) => {
     const updatedContens = [...(data?.contents as []), comment];
     console.log(updatedContens);
@@ -73,20 +59,26 @@ const CommentBox: React.FC<BlogID> = ({ blogid }) => {
 
   return (
     <section>
-      <h2>コメント一覧</h2>
+      <Divider />
+      <br />
+      <div className={classes.root}>
+        <Grid container spacing={2} justify="space-between">
+          <Grid item xs={4}>
+            <Typography variant="h5">コメント一覧</Typography>
+          </Grid>
+          <Grid item xs={4} alignItems="center">
+            <CommentForm
+              blogid={blogid}
+              addComment={addComment}
+              updateComment={revalidate}
+            />
+          </Grid>
+        </Grid>
+      </div>
+      <br />
       <CommentList commentLi={data.contents} />
-      <CommentForm
-        blogid={blogid}
-        addComment={addComment}
-        updateComment={revalidate}
-      />
     </section>
   );
 };
-
-/* <UseCommentList.Provider value={[commentli, mutate]}>
-<CommentList commentLi={commentli} />
-<CommentForm blogid={blogid} commentLi={commentli} />
-</UseCommentList.Provider> */
 
 export default CommentBox;

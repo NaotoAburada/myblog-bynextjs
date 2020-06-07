@@ -33,31 +33,19 @@ const CommentList: React.FC<Comments> = ({ commentLi }) => {
   const classes = useStyles();
   return (
     <div>
-      {commentLi.length > 0 ? (
-        commentLi.map((come) => (
-          <Card variant="outlined">
-            <CardContent>
-              <Typography
-                className={classes.title}
-                color="textSecondary"
-                gutterBottom
-              >
-                {come.comment}
-              </Typography>
-            </CardContent>
-          </Card>
-        ))
-      ) : (
+      {commentLi.map((come) => (
         <Card variant="outlined">
           <CardContent>
             <Typography
               className={classes.title}
               color="textSecondary"
               gutterBottom
-            ></Typography>
+            >
+              {come.comment}
+            </Typography>
           </CardContent>
         </Card>
-      )}
+      ))}
     </div>
   );
 };

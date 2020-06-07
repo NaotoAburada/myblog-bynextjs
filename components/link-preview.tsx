@@ -16,9 +16,11 @@ const LinkPreview: React.FC<Props> = ({ id, title, date }) => {
           <a className="hover:underline">{title}</a>
         </Link>
       </h3>
-      <div>
-        <DateFormater dateString={date} />
-      </div>
+      {date !== "" && (
+        <div>
+          <DateFormater dateString={date} />
+        </div>
+      )}
     </div>
   );
 };

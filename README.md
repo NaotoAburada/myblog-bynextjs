@@ -29,6 +29,7 @@
 - next.js
 - Material-ui
 - SWR
+- Tailwind CSS
 - Node.js(npm)
 - CMS として microCMS を使用
 - 公開するためのデプロイ先は vercel を使用
