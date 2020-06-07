@@ -1,6 +1,6 @@
 # ブログの公開先 URL
 
-[Naoto Aburada Blog.](https://github.com/zeit/next.js/tree/canary/examples/blog-starter)
+[Naoto Aburada Blog.](https://myblog-bynextjs.now.sh/)
 
 # 概要
 
