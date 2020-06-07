@@ -34,20 +34,21 @@ const useStyles = makeStyles((theme: Theme) =>
 type Props = {
   post: PostType;
   morePosts: PostType[];
+  arrayLength: number;
   preview?: boolean;
 };
 
-const Post: React.FC<Props> = ({ post, morePosts, preview }) => {
+const Post: React.FC<Props> = ({ post, morePosts, arrayLength, preview }) => {
   const classes = useStyles();
   const router = useRouter();
 
-  if (!router.isFallback && !post?.slug) {
+  if (!router.isFallback && !post?.id) {
     return <ErrorPage statusCode={404} />;
   }
 
   let linkpostpre = -1;
-  let linkpostback = morePosts.length;
-  for (let i = 0; i < morePosts.length; i++) {
+  let linkpostback = arrayLength;
+  for (let i = 0; i < arrayLength; i++) {
     if (post?.id === morePosts[i].id) {
       if (i !== 0) {
         linkpostpre = i - 1;
@@ -88,7 +89,7 @@ const Post: React.FC<Props> = ({ post, morePosts, preview }) => {
                 </Grid>
                 <Grid item xs={4}>
                   <Paper className={classes.paper}>
-                    {linkpostback === morePosts.length ? (
+                    {linkpostback === arrayLength ? (
                       <BackArticle post={morePosts[0]} linknumber={0} />
                     ) : (
                       <BackArticle post={morePosts[linkpostback]} />
@@ -160,6 +161,7 @@ export async function getStaticProps({ params }: Params) {
   });
   posts = await res.json();
   const articleList = posts.contents;
+  const arrayLength = articleList.length;
 
   return {
     props: {
@@ -168,6 +170,7 @@ export async function getStaticProps({ params }: Params) {
         content,
       },
       morePosts: articleList,
+      arrayLength,
     },
   };
 }
