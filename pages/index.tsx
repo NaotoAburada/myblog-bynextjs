@@ -20,7 +20,7 @@ const Index: React.FC<Props> = ({ allPosts }) => {
         </Head>
         <Container>
           <Intro />
-          <h2 className="mb-10 text-4xl bg-blue-300 md:text-4xl font-bold tracking-tighter leading-tight">
+          <h2 className="px-20 mb-10 text-4xl max-w-xs text-white bg-blue-300 md:text-4xl font-bold tracking-tighter leading-tight">
             記事一覧
           </h2>
           {allPosts.length > 0 && <ArticleList posts={allPosts} />}
