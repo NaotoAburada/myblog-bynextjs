@@ -6,6 +6,7 @@ import Layout from "../components/layout";
 import Head from "next/head";
 import Post from "../types/post";
 import Footer from "../components/footer";
+import styles from "./index.module.css";
 
 type Props = {
   allPosts: Post[];
@@ -20,7 +21,9 @@ const Index: React.FC<Props> = ({ allPosts }) => {
         </Head>
         <Container>
           <Intro />
-          <h2 className="px-20 mb-10 text-4xl max-w-xs text-white bg-blue-300 md:text-4xl font-bold tracking-tighter leading-tight">
+          <h2
+            className={`${styles.subtitle} pt-3 pb-3 pr-4 pl-10 mb-10 text-4xl text-white bg-blue-300 md:text-4xl font-bold tracking-tighter leading-tight`}
+          >
             記事一覧
           </h2>
           {allPosts.length > 0 && <ArticleList posts={allPosts} />}
@@ -31,6 +34,7 @@ const Index: React.FC<Props> = ({ allPosts }) => {
   );
 };
 
+//<h2 className="px-20 mb-10 text-4xl max-w-xs text-white bg-blue-300 md:text-4xl font-bold tracking-tighter leading-tight">
 export default Index;
 
 export async function getStaticProps() {
