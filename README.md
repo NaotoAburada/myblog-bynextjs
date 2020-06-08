@@ -25,11 +25,14 @@
 
 # 採用技術
 
-- TypeScript
-- next.js
-- Material-ui
-- SWR
-- Tailwind CSS
-- Node.js(npm)
+- TypeScript 3.9.2
+- next.js 9.4.4
+- SWR 0.2.2
+- Material-ui/core 4.10.1
+- Material-ui/icons 4.9.1
+- Tailwind CSS 1.4.0
+- highlight.js 10.0.3
+- marked 1.1.0
+- Node.js(npm) 12.16.3
 - CMS として microCMS を使用
 - 公開するためのデプロイ先は vercel を使用
