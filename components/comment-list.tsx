@@ -46,18 +46,3 @@ const CommentList: React.FC<Comments> = ({ commentLi }) => {
 };
 
 export default CommentList;
-
-// <Card variant="outlined">
-// <CardContent>
-//   <Typography
-//     className={classes.title}
-//     color="textSecondary"
-//     gutterBottom
-//   >
-//     {come.comment}
-//     <div className="text-lg ml-6">
-//       <DateFormater dateString={date} />
-//     </div>
-//   </Typography>
-// </CardContent>
-// </Card>

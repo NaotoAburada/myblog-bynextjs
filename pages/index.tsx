@@ -34,7 +34,6 @@ const Index: React.FC<Props> = ({ allPosts }) => {
   );
 };
 
-//<h2 className="px-20 mb-10 text-4xl max-w-xs text-white bg-blue-300 md:text-4xl font-bold tracking-tighter leading-tight">
 export default Index;
 
 export async function getStaticProps() {

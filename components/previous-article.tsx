@@ -25,14 +25,4 @@ const PreviousArticle: React.FC<Props> = ({ post, linknumber = 0 }) => {
   );
 };
 
-// <Typography variant="h6">次の記事へ</Typography>
-// <Link>
-// <LinkPreview
-//   key={post.id}
-//   id={post.id}
-//   title={"次の記事へ"}
-//   date=""
-// />
-// </Link>
-
 export default PreviousArticle;

@@ -25,17 +25,5 @@ const BackArticle: React.FC<Props> = ({ post, linknumber = -1 }) => {
     </section>
   );
 };
-//<Typography variant="h6">前の記事へ</Typography>
-
-// <Link as={`/posts/${post.id}`} href="/posts/[id]">
-// <div>
-//   <LinkPreview
-//     key={post.slug}
-//     id={post.id}
-//     title={"前の記事へ"}
-//     date=""
-//   />
-// </div>
-// </Link>
 
 export default BackArticle;

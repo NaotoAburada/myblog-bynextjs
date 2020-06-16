@@ -1,9 +1,6 @@
 import React from "react";
-import Avatar from "./avatar";
 import DateFormater from "./date-formater";
-import CoverImage from "./cover-image";
 import Link from "next/link";
-import Author from "../types/author";
 
 type Props = {
   title: string;

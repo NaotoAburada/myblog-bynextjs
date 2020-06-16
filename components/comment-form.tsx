@@ -9,8 +9,6 @@ import CMSBlogComment from "../types/cms-blogcomment";
 
 type Props = {
   blogid: string;
-  //  addComment: (comment: CMSBlogComment) => void;
-  //  updateComment: () => Promise<boolean>;
 };
 
 type CMSBlog = {
@@ -69,14 +67,6 @@ const CommentForm: React.FC<Props> = (props: Props) => {
     );
 
     setComment("");
-    // const tmp: CMSBlogComment = {
-    //   id: blogcomment.blogid,
-    //   comment: blogcomment.comment,
-    // };
-
-    // props.addComment(tmp);
-    // ここは必ずAPI更新後に呼ぶ
-    // props.updateComment();
 
     setOpen(false);
   };

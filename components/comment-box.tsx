@@ -47,13 +47,6 @@ const CommentBox: React.FC<BlogID> = ({ blogid }) => {
     { refreshInterval: 1000 }
   );
 
-  // const addComment = async (comment: { id: string; comment: string }) => {
-  //   const updatedContens = [...(data?.contents as []), comment];
-  //   console.log(updatedContens);
-  //   await mutate({ contents: updatedContens }, true);
-  //   console.log(data?.contents);
-  // };
-
   if (error) return <div>error</div>;
   if (!data) return <div>loading...</div>;
 
